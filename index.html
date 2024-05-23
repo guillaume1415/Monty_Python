@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détection de Mouvement</title>
+</head>
+<body>
+    <h1>Détection de Mouvement avec Accéléromètre</h1>
+    <p>Déplacez votre téléphone pour entendre un bruit.</p>
+    <audio id="sound" src="votre-fichier-audio.mp3"></audio>
+    <script>
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', function(event) {
+                var acceleration = event.accelerationIncludingGravity;
+                var x = acceleration.x;
+                var y = acceleration.y;
+                var z = acceleration.z;
+
+                var threshold = 15; // Seuil de sensibilité pour détecter le mouvement
+                if (Math.abs(x) > threshold || Math.abs(y) > threshold || Math.abs(z) > threshold) {
+                    var audio = document.getElementById('sound');
+                    audio.play();
+                }
+            });
+        } else {
+            alert("Votre navigateur ne supporte pas l'événement DeviceMotion.");
+        }
+    </script>
+</body>
+</html>
